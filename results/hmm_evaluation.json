@@ -1,0 +1,124 @@
+{
+  "summary": {
+    "split": "student_test",
+    "stay_bonus": 1.5,
+    "n_trips": 10,
+    "classifier_only": {
+      "pointwise_accuracy": 0.498643006263048,
+      "mean_trip_accuracy": 0.5203391753566222,
+      "mean_trip_top3_accuracy": 0.9146168358355181,
+      "route_continuity": 0.9882753026806773
+    },
+    "classifier_plus_hmm": {
+      "pointwise_accuracy": 0.5757306889352818,
+      "mean_trip_accuracy": 0.5967011838077084,
+      "mean_trip_top3_accuracy": 0.9315849906295692,
+      "route_continuity": 0.9998695206079262
+    },
+    "sequence_level": {
+      "pct_trips_ge_80pct_correct_hmm": 0.1
+    }
+  },
+  "per_trip": [
+    {
+      "trip_id": "00000000",
+      "n_observations": 2503,
+      "classifier_top1_accuracy": 0.47143427886536154,
+      "hmm_top1_accuracy": 0.46943667598881345,
+      "classifier_top3_accuracy": 0.961246504194966,
+      "hmm_top3_accuracy": 0.9716340391530164,
+      "classifier_route_continuity": 0.9920063948840927,
+      "hmm_route_continuity": 0.9992006394884093
+    },
+    {
+      "trip_id": "00000007",
+      "n_observations": 1354,
+      "classifier_top1_accuracy": 0.45125553914327915,
+      "hmm_top1_accuracy": 0.6432791728212703,
+      "classifier_top3_accuracy": 0.9298375184638109,
+      "hmm_top3_accuracy": 0.9793205317577548,
+      "classifier_route_continuity": 0.9977827050997783,
+      "hmm_route_continuity": 1.0
+    },
+    {
+      "trip_id": "00000009",
+      "n_observations": 1049,
+      "classifier_top1_accuracy": 0.38608198284080075,
+      "hmm_top1_accuracy": 0.449952335557674,
+      "classifier_top3_accuracy": 0.8236415633937083,
+      "hmm_top3_accuracy": 0.8446139180171592,
+      "classifier_route_continuity": 0.9980916030534351,
+      "hmm_route_continuity": 1.0
+    },
+    {
+      "trip_id": "00000040",
+      "n_observations": 2995,
+      "classifier_top1_accuracy": 0.528881469115192,
+      "hmm_top1_accuracy": 0.552253756260434,
+      "classifier_top3_accuracy": 0.9569282136894824,
+      "hmm_top3_accuracy": 0.9662771285475793,
+      "classifier_route_continuity": 0.9956579826319305,
+      "hmm_route_continuity": 1.0
+    },
+    {
+      "trip_id": "00000052",
+      "n_observations": 262,
+      "classifier_top1_accuracy": 0.7595419847328244,
+      "hmm_top1_accuracy": 0.8053435114503816,
+      "classifier_top3_accuracy": 0.9770992366412213,
+      "hmm_top3_accuracy": 0.9770992366412213,
+      "classifier_route_continuity": 0.9233716475095786,
+      "hmm_route_continuity": 1.0
+    },
+    {
+      "trip_id": "00000056",
+      "n_observations": 3958,
+      "classifier_top1_accuracy": 0.616978271854472,
+      "hmm_top1_accuracy": 0.6662455785750379,
+      "classifier_top3_accuracy": 0.934310257705912,
+      "hmm_top3_accuracy": 0.9378473976755938,
+      "classifier_route_continuity": 0.9863532979529946,
+      "hmm_route_continuity": 0.9994945665908517
+    },
+    {
+      "trip_id": "00000065",
+      "n_observations": 768,
+      "classifier_top1_accuracy": 0.6328125,
+      "hmm_top1_accuracy": 0.6901041666666666,
+      "classifier_top3_accuracy": 0.9309895833333334,
+      "hmm_top3_accuracy": 0.9322916666666666,
+      "classifier_route_continuity": 1.0,
+      "hmm_route_continuity": 1.0
+    },
+    {
+      "trip_id": "00000076",
+      "n_observations": 1486,
+      "classifier_top1_accuracy": 0.40107671601615075,
+      "hmm_top1_accuracy": 0.4697173620457604,
+      "classifier_top3_accuracy": 0.8526244952893675,
+      "hmm_top3_accuracy": 0.8681022880215343,
+      "classifier_route_continuity": 0.9986531986531987,
+      "hmm_route_continuity": 1.0
+    },
+    {
+      "trip_id": "00000077",
+      "n_observations": 3911,
+      "classifier_top1_accuracy": 0.4004091025313219,
+      "hmm_top1_accuracy": 0.5650728713883917,
+      "classifier_top3_accuracy": 0.8744566607005881,
+      "hmm_top3_accuracy": 0.9301968805931987,
+      "classifier_route_continuity": 1.0,
+      "hmm_route_continuity": 1.0
+    },
+    {
+      "trip_id": "00000091",
+      "n_observations": 874,
+      "classifier_top1_accuracy": 0.5549199084668193,
+      "hmm_top1_accuracy": 0.6556064073226545,
+      "classifier_top3_accuracy": 0.9050343249427918,
+      "hmm_top3_accuracy": 0.9084668192219679,
+      "classifier_route_continuity": 0.9908361970217641,
+      "hmm_route_continuity": 1.0
+    }
+  ]
+}

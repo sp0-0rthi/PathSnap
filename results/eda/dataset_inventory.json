@@ -1,0 +1,13 @@
+{
+  "n_trips_total": 100,
+  "n_train": 80,
+  "n_student_test": 10,
+  "n_evaluator_test": 10,
+  "file_counts": {
+    ".track": 100,
+    ".nodes": 100,
+    ".arcs": 100,
+    ".route": 100
+  },
+  "partition_note": "Dataset-provided partition layout if detected, else deterministic seeded 80/10/10 split (see src/splits.py)."
+}

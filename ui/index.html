@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PathSnap - Route Reconstruction</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; display: flex; height: 100vh; }
+  #panel { width: 320px; padding: 16px; box-sizing: border-box; background: #f7f7f7;
+           border-right: 1px solid #ccc; overflow-y: auto; }
+  #map { flex: 1; }
+  h1 { font-size: 20px; margin: 0 0 12px; }
+  label { font-size: 13px; color: #333; display: block; margin-top: 10px; }
+  input, select, button { width: 100%; padding: 7px; margin-top: 4px; box-sizing: border-box; }
+  button { background: #1565c0; color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+  button:disabled { background: #999; }
+  #metrics { margin-top: 16px; font-size: 13px; background: #fff; padding: 10px;
+             border: 1px solid #ddd; border-radius: 6px; display: none; }
+  #metrics b { font-size: 15px; }
+  .row { display: flex; justify-content: space-between; margin: 3px 0; }
+  #status { font-size: 12px; color: #666; margin-top: 8px; }
+  .legend { font-size: 12px; margin-top: 12px; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+</style>
+</head>
+<body>
+<div id="panel">
+  <h1>PathSnap</h1>
+  <div>Distributed map-matching &amp; route reconstruction</div>
+  <label>API base URL (Laptop 1)</label>
+  <input id="apiUrl" value="http://localhost:8000">
+  <label>Evaluation trip</label>
+  <select id="tripSelect" disabled><option>Load trips first</option></select>
+  <button id="loadBtn">Load evaluation trips</button>
+  <button id="predictBtn" disabled>Reconstruct route</button>
+  <div id="status"></div>
+  <div id="metrics"></div>
+  <div class="legend">
+    <span class="dot" style="background:#1f77b4"></span> Raw GPS observations<br>
+    <span class="dot" style="background:#d62728"></span> Predicted route (HMM/Viterbi)
+  </div>
+</div>
+<div id="map"></div>
+<script>
+const map = L.map('map').setView([12.935, 77.605], 14);
+L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+            {maxZoom: 18,
+             attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)'}).addTo(map);
+let rawLayer = null, predLayer = null;
+
+const $ = id => document.getElementById(id);
+
+$('loadBtn').onclick = async () => {
+  $('status').textContent = 'Loading trips...';
+  try {
+    const r = await fetch($('apiUrl').value.replace(/\/$/, '') + '/trips');
+    const data = await r.json();
+    const sel = $('tripSelect');
+    sel.innerHTML = '';
+    data.trips.forEach(t => {
+      const o = document.createElement('option');
+      o.value = t.trip_id;
+      o.textContent = `${t.trip_id} (${t.num_points} points)`;
+      sel.appendChild(o);
+    });
+    sel.disabled = false;
+    $('predictBtn').disabled = false;
+    $('status').textContent = `${data.trips.length} evaluation trips loaded.`;
+  } catch (e) {
+    $('status').textContent = 'Failed to reach API: ' + e;
+  }
+};
+
+$('predictBtn').onclick = async () => {
+  const tid = $('tripSelect').value;
+  $('status').textContent = `Predicting ${tid}...`;
+  $('predictBtn').disabled = true;
+  try {
+    const r = await fetch($('apiUrl').value.replace(/\/$/, '') + '/predict', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({trip_id: tid})
+    });
+    if (!r.ok) throw new Error(await r.text());
+    const d = await r.json();
+    drawResult(d);
+    showMetrics(d);
+    $('status').textContent = `Done in ${d.processing_time_s.toFixed(2)}s.`;
+  } catch (e) {
+    $('status').textContent = 'Prediction failed: ' + e;
+  }
+  $('predictBtn').disabled = false;
+};
+
+function drawResult(d) {
+  if (rawLayer) map.removeLayer(rawLayer);
+  if (predLayer) map.removeLayer(predLayer);
+  rawLayer = L.layerGroup(d.raw_points.map(p =>
+    L.circleMarker(p, {radius: 2.5, color: '#1f77b4', fillOpacity: 0.6}))).addTo(map);
+  const predPts = [];
+  d.matched_arcs.forEach(g => {
+    if (!g) return;
+    L.polyline(g, {color: '#d62728', weight: 4, opacity: 0.85}).addTo(predLayer || (predLayer = L.layerGroup()));
+    predPts.push(g[0], g[1]);
+  });
+  if (predLayer) predLayer.addTo(map);
+  if (d.raw_points.length) map.fitBounds(L.latLngBounds(d.raw_points));
+}
+
+function showMetrics(d) {
+  const el = $('metrics');
+  el.style.display = 'block';
+  el.innerHTML = `
+    <b>${d.trip_id}</b>
+    <div class="row"><span>Observations</span><span>${d.num_points}</span></div>
+    <div class="row"><span>Accuracy (classifier)</span><span>${d.classifier_top3_accuracy == null ? 'n/a' : (100*d.classifier_top3_accuracy).toFixed(1)+'%'}</span></div>
+    <div class="row"><span><b>Accuracy (HMM)</b></span><span><b>${d.hmm_top3_accuracy == null ? 'n/a' : (100*d.hmm_top3_accuracy).toFixed(1)+'%'}</b></span></div>
+    <div class="row"><span>Route continuity (HMM)</span><span>${(100*d.route_continuity_hmm).toFixed(1)}%</span></div>
+    <div class="row"><span>Route continuity (classifier)</span><span>${(100*d.route_continuity_classifier).toFixed(1)}%</span></div>
+    <div class="row"><span>Candidate miss rate</span><span>${(100*d.candidate_miss_rate).toFixed(1)}%</span></div>`;
+}
+</script>
+</body>
+</html>

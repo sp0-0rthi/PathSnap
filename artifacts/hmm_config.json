@@ -1,0 +1,10 @@
+{
+  "transition_beta": 15.0,
+  "transition_eps": 1e-09,
+  "emission_eps": 1e-09,
+  "gap_seconds": 60.0,
+  "gap_dist_m": 300.0,
+  "candidate_k": 12,
+  "candidate_radius_m": 100.0,
+  "candidate_relaxed_radius_m": 250.0
+}

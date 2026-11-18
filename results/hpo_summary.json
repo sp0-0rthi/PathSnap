@@ -1,0 +1,34 @@
+{
+  "sampler": "Optuna TPESampler (Bayesian)",
+  "objective": "mean GroupKFold(5) log loss on 80 training trips (minimise)",
+  "n_trials": 4,
+  "search_space": {
+    "n_estimators": "int, 100-500: number of trees; more trees stabilise probabilities",
+    "max_depth": "int, 4-32: tree depth cap; controls overfitting on noisy GPS",
+    "min_samples_split": "int, 2-20: minimum samples to split a node",
+    "min_samples_leaf": "int, 1-10: leaf smoothing, improves probability estimates",
+    "max_features": "categorical {sqrt, log2, 1.0}: feature subsampling per split",
+    "class_weight": "categorical {None, balanced}: compensate 1:4 label imbalance"
+  },
+  "best_params": {
+    "n_estimators": 250,
+    "max_depth": 31,
+    "min_samples_split": 15,
+    "min_samples_leaf": 6,
+    "max_features": "sqrt",
+    "class_weight": "none"
+  },
+  "best_cv_log_loss": 0.21324938442129335,
+  "hpo_wall_time_s": 35.536102133,
+  "tuned": {
+    "student_test_macro_f1": 0.6197542610281894,
+    "student_test_f1": 0.2941310109806891,
+    "student_test_precision": 0.531617848343827,
+    "student_test_recall": 0.20330820770519262,
+    "student_test_log_loss": 0.2178407540818093,
+    "student_test_top1_accuracy": 0.5203391753566222,
+    "student_test_route_continuity": 0.9882753026806773,
+    "train_time_s": 8.972427112000005,
+    "inference_time_s": 2.0796286700000053
+  }
+}

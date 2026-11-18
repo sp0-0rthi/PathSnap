@@ -1,0 +1,44 @@
+{
+  "trips": [
+    {
+      "trip_id": "00000015",
+      "num_points": 6854
+    },
+    {
+      "trip_id": "00000017",
+      "num_points": 1346
+    },
+    {
+      "trip_id": "00000023",
+      "num_points": 458
+    },
+    {
+      "trip_id": "00000030",
+      "num_points": 654
+    },
+    {
+      "trip_id": "00000049",
+      "num_points": 2642
+    },
+    {
+      "trip_id": "00000059",
+      "num_points": 1031
+    },
+    {
+      "trip_id": "00000067",
+      "num_points": 916
+    },
+    {
+      "trip_id": "00000073",
+      "num_points": 1144
+    },
+    {
+      "trip_id": "00000087",
+      "num_points": 1399
+    },
+    {
+      "trip_id": "00000094",
+      "num_points": 3230
+    }
+  ]
+}

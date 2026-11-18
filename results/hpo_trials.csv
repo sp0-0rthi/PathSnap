@@ -1,0 +1,5 @@
+number,value,datetime_start,datetime_complete,duration,params_class_weight,params_max_depth,params_max_features,params_min_samples_leaf,params_min_samples_split,params_n_estimators,state
+0,0.21324938442129335,2026-11-18 13:57:50.284469,2026-11-18 13:58:41.709439,0 days 00:00:51.424970,none,31,sqrt,6,15,250,COMPLETE
+1,0.42046361858815384,2026-11-18 13:58:41.725680,2026-11-18 13:59:10.508454,0 days 00:00:28.782774,balanced,4,sqrt,9,20,400,COMPLETE
+2,,2026-11-18 13:59:10.519543,,,none,12,1.0,2,13,250,RUNNING
+3,0.21324938442129335,2026-11-18 14:03:02.537270,2026-11-18 14:03:38.053259,0 days 00:00:35.515989,none,31,sqrt,6,15,250,COMPLETE

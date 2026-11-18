@@ -1,0 +1,53 @@
+{
+  "seed": 42,
+  "config": {
+    "seed": 42,
+    "candidate_k": 12,
+    "candidate_radius_m": 100.0,
+    "candidate_relaxed_radius_m": 250.0,
+    "gap_seconds": 60.0,
+    "gap_dist_m": 300.0,
+    "n_train_trips": 80,
+    "n_student_test_trips": 10,
+    "n_eval_trips": 10,
+    "cv_folds": 5,
+    "hpo_trials": 20,
+    "transition_beta": 15.0,
+    "train_max_obs_per_trip": 120,
+    "transition_eps": 1e-09,
+    "emission_eps": 1e-09,
+    "path_search_factor": 4.0,
+    "path_search_buffer_m": 200.0,
+    "snap_tolerance_m": 5.0
+  },
+  "stages": {
+    "build_dataset": {
+      "seconds": 7.015633355
+    },
+    "compare_models": {
+      "seconds": 54.833433309
+    },
+    "hpo": {
+      "seconds": 50.893344842000005,
+      "n_trials": 4,
+      "best_params": {
+        "n_estimators": 250,
+        "max_depth": 31,
+        "min_samples_split": 15,
+        "min_samples_leaf": 6,
+        "max_features": "sqrt",
+        "class_weight": "none"
+      }
+    },
+    "hmm_eval": {
+      "seconds": 45.400319525000015
+    }
+  },
+  "candidate_miss_rate": 0.08885302789473046,
+  "partitions": {
+    "train": 80,
+    "student_test": 10,
+    "evaluator_test": 10
+  },
+  "total_seconds": 171.57510878
+}

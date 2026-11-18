@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Dataset caches (regenerable) - raw data stays local
+data/processed/
+data/raw/*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Note: artifacts/ (trained model + configs) and results/ (CSVs, logs,
+# figures, maps) ARE committed, as required by the submission guidelines.

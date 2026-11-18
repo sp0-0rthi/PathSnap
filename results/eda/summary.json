@@ -1,0 +1,17 @@
+{
+  "observations_total": 227577,
+  "observations_per_trip": {
+    "mean": 2528.633333333333,
+    "min": 262,
+    "max": 19313
+  },
+  "median_sampling_interval_s": 1.0,
+  "pct_1s_steps": 0.9819896936551981,
+  "missing_gps_cells_total": 0,
+  "trips_with_gaps_gt_5s": 47,
+  "max_gap_s_overall": 153064.0,
+  "partitions_analysed": [
+    "train",
+    "student_test"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "representative_trip": "00000001",
+  "partition": "train",
+  "n_arcs": 165790,
+  "n_nodes": 88809,
+  "n_connected_components": 131,
+  "largest_component_arcs": 163244,
+  "isolated_arcs": 1,
+  "mean_arc_length_m": 39.62296911307076,
+  "median_arc_length_m": 20.2059228620149
+}
