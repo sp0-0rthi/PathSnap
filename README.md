@@ -14,7 +14,7 @@ trips to an evaluator UI (Laptop 2).
 
 - Spoorthi A N (sp0-0rthi) - data pipeline, features, documentation
 - Sourabh (SourabhBPatil) - model zoo, training, HPO
-- Shubharth (shubharth2006) - HMM/Viterbi decoder, API
+- Shubharth (shubharth2006) - API, Root Decoder
 - Bindu (Bindusuresh) - evaluator UI and demo
 
 ## Repository layout
