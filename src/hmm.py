@@ -41,16 +41,6 @@ from .geo import haversine_m
 from .road_network import RoadNetwork
 
 
-def transition_logprob(a: int, b: int, gps_dist_m: float, network: RoadNetwork,
-                       beta: float = CFG.transition_beta,
-                       eps: float = CFG.transition_eps) -> float:
-    cutoff = gps_dist_m * CFG.path_search_factor + CFG.path_search_buffer_m
-    d_net = network.path_distance(a, b, cutoff)
-    if d_net is None:
-        return float(np.log(eps))
-    return -abs(d_net - gps_dist_m) / beta
-
-
 def viterbi_decode(emissions, cand_lists, track, network: RoadNetwork,
                    cfg: CFG = CFG):
     """Decode the most likely arc sequence for one trip.
