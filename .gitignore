@@ -15,3 +15,13 @@ Thumbs.db
 
 # Note: artifacts/ (trained model + configs) and results/ (CSVs, logs,
 # figures, maps) ARE committed, as required by the submission guidelines.
+
+# Test / tooling caches
+.pytest_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Optuna study databases (large, regenerable; trial CSV/JSON are committed)
+results/hpo_study.db
+*.db-journal
