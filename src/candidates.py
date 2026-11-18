@@ -1,3 +1,4 @@
+# PathSnap v3.1 - data pipeline (owner: Spoorthi)
 """Candidate generation.
 
 For each GPS observation we take the k road arcs whose midpoints are
